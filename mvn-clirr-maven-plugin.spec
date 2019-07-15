@@ -4,7 +4,7 @@
 #
 Name     : mvn-clirr-maven-plugin
 Version  : 2.7
-Release  : 1
+Release  : 2
 URL      : https://github.com/mojohaus/clirr-maven-plugin/archive/clirr-maven-plugin-2.7.tar.gz
 Source0  : https://github.com/mojohaus/clirr-maven-plugin/archive/clirr-maven-plugin-2.7.tar.gz
 Source1  : https://repo.maven.apache.org/maven2/org/codehaus/mojo/clirr-maven-plugin/2.7/clirr-maven-plugin-2.7.jar
@@ -12,17 +12,37 @@ Source2  : https://repo.maven.apache.org/maven2/org/codehaus/mojo/clirr-maven-pl
 Summary  : No detailed summary available
 Group    : Development/Tools
 License  : Apache-2.0
+Requires: mvn-clirr-maven-plugin-data = %{version}-%{release}
 
 %description
 # MojoHaus Clirr Maven Plugin
 This is the [clirr-maven-plugin](http://www.mojohaus.org/clirr-maven-plugin/).
 [![Build Status](https://travis-ci.org/mojohaus/clirr-maven-plugin.svg?branch=master)](https://travis-ci.org/mojohaus/clirr-maven-plugin)
 
+%package data
+Summary: data components for the mvn-clirr-maven-plugin package.
+Group: Data
+
+%description data
+data components for the mvn-clirr-maven-plugin package.
+
+
 %prep
 
 %build
 
 %install
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/codehaus/mojo/clirr-maven-plugin/2.7
+cp %{SOURCE1} %{buildroot}/usr/share/java/.m2/repository/org/codehaus/mojo/clirr-maven-plugin/2.7
+
+mkdir -p %{buildroot}/usr/share/java/.m2/repository/org/codehaus/mojo/clirr-maven-plugin/2.7
+cp %{SOURCE2} %{buildroot}/usr/share/java/.m2/repository/org/codehaus/mojo/clirr-maven-plugin/2.7
+
 
 %files
 %defattr(-,root,root,-)
+
+%files data
+%defattr(-,root,root,-)
+/usr/share/java/.m2/repository/org/codehaus/mojo/clirr-maven-plugin/2.7/clirr-maven-plugin-2.7.jar
+/usr/share/java/.m2/repository/org/codehaus/mojo/clirr-maven-plugin/2.7/clirr-maven-plugin-2.7.pom
